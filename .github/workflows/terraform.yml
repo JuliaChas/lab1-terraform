@@ -16,15 +16,15 @@ jobs:
         run: terraform fmt -check -recursive
 
   security:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v4
-    - name: Trivy IaC Scan
-      uses: aquasecurity/trivy-action@master
-      with:
-        scan-type: 'config'
-        scan-ref: '.'
-        severity: 'CRITICAL,HIGH'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trivy IaC Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          scan-ref: '.'
+          severity: 'CRITICAL,HIGH'
 
   validate:
     runs-on: ubuntu-latest
