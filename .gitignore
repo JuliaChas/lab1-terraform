@@ -1,0 +1,9 @@
+*.tfstate
+*.tfstate.*
+.terraform/
+terraform.tfvars
+*.tfvars
+!example.tfvars
+
+# Service account key (do NOT commit)
+gcp-sa-key.json
