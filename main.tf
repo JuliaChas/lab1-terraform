@@ -1,4 +1,9 @@
 terraform {
+  backend "gcs" {
+    bucket = "chas-tf-state-m4k-gang"
+    prefix = "terraform/state/julia"
+  }
+
   required_providers {
     google = {
       source  = "hashicorp/google"
