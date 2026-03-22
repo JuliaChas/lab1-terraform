@@ -32,7 +32,7 @@ resource "google_compute_instance" "vm" {
 
   network_interface {
     network = "default"
-    access_config {} # Ger VM:en en extern IP
+    access_config {}
   }
 
   metadata_startup_script = file("startup.sh")
