@@ -1,0 +1,18 @@
+name: Terraform Destroy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  destroy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      - name: Terraform Init
+        run: terraform init
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve
