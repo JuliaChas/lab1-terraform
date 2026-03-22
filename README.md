@@ -57,6 +57,28 @@ Det gör att data kan återställas om något skulle gå fel med servern.
 
 ![Backup](backup.png)
 
+## Disaster Recovery
+
+### RPO – Recovery Point Objective
+RPO beskriver hur mycket data som maximalt kan gå förlorad vid ett haveri.
+Med dagliga snapshots som tas kl 03:00 är max dataförlust **24 timmar**.
+
+### RTO – Recovery Time Objective
+RTO beskriver hur snabbt infrastrukturen kan återställas.
+Med Terraform kan hela infrastrukturen återskapas på **några minuter** genom att köra `terraform apply`.
+
+### Återställningsscenario
+**Om VM:en försvinner eller kraschar:**
+1. Kör `terraform apply` — Terraform återskapar VM:en från scratch automatiskt.
+2. VM:en startar upp med samma konfiguration och startup-script som tidigare.
+
+**Om data på disken försvinner:**
+1. Gå till GCP Console → Snapshots
+2. Hitta senaste snapshot (max 24h gammal)
+3. Kör `gcloud compute disks create restored-disk --source-snapshot=SNAPSHOT_NAME`
+4. Koppla den återställda disken till VM:en
+
+
 ## Säkerhetsbeslut
 När servern startas körs ett startup-script som installerar och aktiverar några grundläggande säkerhetsfunktioner.
 
